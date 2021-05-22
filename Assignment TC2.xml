@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f921c884-f0e6-4313-9d9d-1b628bdefb1f" created="3.8.0" activeEnvironment="Default environment" name="Assignment TC2" updated="3.8.0 2021-04-27T13:32:15Z" encryptionMode="Not encrypted" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="40ccfc80-92cd-4a9b-848b-ebcc58a7d910" name="User" type="rest_ex" wadlVersion="https://swagger.io/swagger2/specification" definitionUrl="https://petstore.swagger.io/v2/swagger.json" basePath="/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.</con:description><con:settings/><con:definitionCache type="TEXT" rootPart="https://petstore.swagger.io/v2/swagger.json"><con:part><con:url>https://petstore.swagger.io/v2/swagger.json</con:url><con:content>{"swagger":"2.0","info":{"description":"This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.","version":"1.0.5","title":"Swagger Petstore","termsOfService":"http://swagger.io/terms/","contact":{"email":"apiteam@swagger.io"},"license":{"name":"Apache 2.0","url":"http://www.apache.org/licenses/LICENSE-2.0.html"}},"host":"petstore.swagger.io","basePath":"/v2","tags":[{"name":"pet","description":"Everything about your Pets","externalDocs":{"description":"Find out more","url":"http://swagger.io"}},{"name":"store","description":"Access to Petstore orders"},{"name":"user","description":"Operations about user","externalDocs":{"description":"Find out more about our store","url":"http://swagger.io"}}],"schemes":["https","http"],"paths":{"/pet/{petId}/uploadImage":{"post":{"tags":["pet"],"summary":"uploads an image","description":"","operationId":"uploadFile","consumes":["multipart/form-data"],"produces":["application/json"],"parameters":[{"name":"petId","in":"path","description":"ID of pet to update","required":true,"type":"integer","format":"int64"},{"name":"additionalMetadata","in":"formData","description":"Additional data to pass to server","required":false,"type":"string"},{"name":"file","in":"formData","description":"file to upload","required":false,"type":"file"}],"responses":{"200":{"description":"successful operation","schema":{"$ref":"#/definitions/ApiResponse"}}},"security":[{"petstore_auth":["write:pets","read:pets"]}]}},"/pet":{"post":{"tags":["pet"],"summary":"Add a new pet to the store","description":"","operationId":"addPet","consumes":["application/json","application/xml"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"Pet object that needs to be added to the store","required":true,"schema":{"$ref":"#/definitions/Pet"}}],"responses":{"405":{"description":"Invalid input"}},"security":[{"petstore_auth":["write:pets","read:pets"]}]},"put":{"tags":["pet"],"summary":"Update an existing pet","description":"","operationId":"updatePet","consumes":["application/json","application/xml"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"Pet object that needs to be added to the store","required":true,"schema":{"$ref":"#/definitions/Pet"}}],"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Pet not found"},"405":{"description":"Validation exception"}},"security":[{"petstore_auth":["write:pets","read:pets"]}]}},"/pet/findByStatus":{"get":{"tags":["pet"],"summary":"Finds Pets by status","description":"Multiple status values can be provided with comma separated strings","operationId":"findPetsByStatus","produces":["application/json","application/xml"],"parameters":[{"name":"status","in":"query","description":"Status values that need to be considered for filter","required":true,"type":"array","items":{"type":"string","enum":["available","pending","sold"],"default":"available"},"collectionFormat":"multi"}],"responses":{"200":{"description":"successful operation","schema":{"type":"array","items":{"$ref":"#/definitions/Pet"}}},"400":{"description":"Invalid status value"}},"security":[{"petstore_auth":["write:pets","read:pets"]}]}},"/pet/findByTags":{"get":{"tags":["pet"],"summary":"Finds Pets by tags","description":"Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.","operationId":"findPetsByTags","produces":["application/json","application/xml"],"parameters":[{"name":"tags","in":"query","description":"Tags to filter by","required":true,"type":"array","items":{"type":"string"},"collectionFormat":"multi"}],"responses":{"200":{"description":"successful operation","schema":{"type":"array","items":{"$ref":"#/definitions/Pet"}}},"400":{"description":"Invalid tag value"}},"security":[{"petstore_auth":["write:pets","read:pets"]}],"deprecated":true}},"/pet/{petId}":{"get":{"tags":["pet"],"summary":"Find pet by ID","description":"Returns a single pet","operationId":"getPetById","produces":["application/json","application/xml"],"parameters":[{"name":"petId","in":"path","description":"ID of pet to return","required":true,"type":"integer","format":"int64"}],"responses":{"200":{"description":"successful operation","schema":{"$ref":"#/definitions/Pet"}},"400":{"description":"Invalid ID supplied"},"404":{"description":"Pet not found"}},"security":[{"api_key":[]}]},"post":{"tags":["pet"],"summary":"Updates a pet in the store with form data","description":"","operationId":"updatePetWithForm","consumes":["application/x-www-form-urlencoded"],"produces":["application/json","application/xml"],"parameters":[{"name":"petId","in":"path","description":"ID of pet that needs to be updated","required":true,"type":"integer","format":"int64"},{"name":"name","in":"formData","description":"Updated name of the pet","required":false,"type":"string"},{"name":"status","in":"formData","description":"Updated status of the pet","required":false,"type":"string"}],"responses":{"405":{"description":"Invalid input"}},"security":[{"petstore_auth":["write:pets","read:pets"]}]},"delete":{"tags":["pet"],"summary":"Deletes a pet","description":"","operationId":"deletePet","produces":["application/json","application/xml"],"parameters":[{"name":"api_key","in":"header","required":false,"type":"string"},{"name":"petId","in":"path","description":"Pet id to delete","required":true,"type":"integer","format":"int64"}],"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Pet not found"}},"security":[{"petstore_auth":["write:pets","read:pets"]}]}},"/store/inventory":{"get":{"tags":["store"],"summary":"Returns pet inventories by status","description":"Returns a map of status codes to quantities","operationId":"getInventory","produces":["application/json"],"parameters":[],"responses":{"200":{"description":"successful operation","schema":{"type":"object","additionalProperties":{"type":"integer","format":"int32"}}}},"security":[{"api_key":[]}]}},"/store/order":{"post":{"tags":["store"],"summary":"Place an order for a pet","description":"","operationId":"placeOrder","consumes":["application/json"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"order placed for purchasing the pet","required":true,"schema":{"$ref":"#/definitions/Order"}}],"responses":{"200":{"description":"successful operation","schema":{"$ref":"#/definitions/Order"}},"400":{"description":"Invalid Order"}}}},"/store/order/{orderId}":{"get":{"tags":["store"],"summary":"Find purchase order by ID","description":"For valid response try integer IDs with value >= 1 and &lt;= 10. Other values will generated exceptions","operationId":"getOrderById","produces":["application/json","application/xml"],"parameters":[{"name":"orderId","in":"path","description":"ID of pet that needs to be fetched","required":true,"type":"integer","maximum":10,"minimum":1,"format":"int64"}],"responses":{"200":{"description":"successful operation","schema":{"$ref":"#/definitions/Order"}},"400":{"description":"Invalid ID supplied"},"404":{"description":"Order not found"}}},"delete":{"tags":["store"],"summary":"Delete purchase order by ID","description":"For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors","operationId":"deleteOrder","produces":["application/json","application/xml"],"parameters":[{"name":"orderId","in":"path","description":"ID of the order that needs to be deleted","required":true,"type":"integer","minimum":1,"format":"int64"}],"responses":{"400":{"description":"Invalid ID supplied"},"404":{"description":"Order not found"}}}},"/user/createWithList":{"post":{"tags":["user"],"summary":"Creates list of users with given input array","description":"","operationId":"createUsersWithListInput","consumes":["application/json"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"List of user object","required":true,"schema":{"type":"array","items":{"$ref":"#/definitions/User"}}}],"responses":{"default":{"description":"successful operation"}}}},"/user/{username}":{"get":{"tags":["user"],"summary":"Get user by user name","description":"","operationId":"getUserByName","produces":["application/json","application/xml"],"parameters":[{"name":"username","in":"path","description":"The name that needs to be fetched. Use user1 for testing. ","required":true,"type":"string"}],"responses":{"200":{"description":"successful operation","schema":{"$ref":"#/definitions/User"}},"400":{"description":"Invalid username supplied"},"404":{"description":"User not found"}}},"put":{"tags":["user"],"summary":"Updated user","description":"This can only be done by the logged in user.","operationId":"updateUser","consumes":["application/json"],"produces":["application/json","application/xml"],"parameters":[{"name":"username","in":"path","description":"name that need to be updated","required":true,"type":"string"},{"in":"body","name":"body","description":"Updated user object","required":true,"schema":{"$ref":"#/definitions/User"}}],"responses":{"400":{"description":"Invalid user supplied"},"404":{"description":"User not found"}}},"delete":{"tags":["user"],"summary":"Delete user","description":"This can only be done by the logged in user.","operationId":"deleteUser","produces":["application/json","application/xml"],"parameters":[{"name":"username","in":"path","description":"The name that needs to be deleted","required":true,"type":"string"}],"responses":{"400":{"description":"Invalid username supplied"},"404":{"description":"User not found"}}}},"/user/login":{"get":{"tags":["user"],"summary":"Logs user into the system","description":"","operationId":"loginUser","produces":["application/json","application/xml"],"parameters":[{"name":"username","in":"query","description":"The user name for login","required":true,"type":"string"},{"name":"password","in":"query","description":"The password for login in clear text","required":true,"type":"string"}],"responses":{"200":{"description":"successful operation","headers":{"X-Expires-After":{"type":"string","format":"date-time","description":"date in UTC when token expires"},"X-Rate-Limit":{"type":"integer","format":"int32","description":"calls per hour allowed by the user"}},"schema":{"type":"string"}},"400":{"description":"Invalid username/password supplied"}}}},"/user/logout":{"get":{"tags":["user"],"summary":"Logs out current logged in user session","description":"","operationId":"logoutUser","produces":["application/json","application/xml"],"parameters":[],"responses":{"default":{"description":"successful operation"}}}},"/user/createWithArray":{"post":{"tags":["user"],"summary":"Creates list of users with given input array","description":"","operationId":"createUsersWithArrayInput","consumes":["application/json"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"List of user object","required":true,"schema":{"type":"array","items":{"$ref":"#/definitions/User"}}}],"responses":{"default":{"description":"successful operation"}}}},"/user":{"post":{"tags":["user"],"summary":"Create user","description":"This can only be done by the logged in user.","operationId":"createUser","consumes":["application/json"],"produces":["application/json","application/xml"],"parameters":[{"in":"body","name":"body","description":"Created user object","required":true,"schema":{"$ref":"#/definitions/User"}}],"responses":{"default":{"description":"successful operation"}}}}},"securityDefinitions":{"api_key":{"type":"apiKey","name":"api_key","in":"header"},"petstore_auth":{"type":"oauth2","authorizationUrl":"https://petstore.swagger.io/oauth/authorize","flow":"implicit","scopes":{"read:pets":"read your pets","write:pets":"modify pets in your account"}}},"definitions":{"ApiResponse":{"type":"object","properties":{"code":{"type":"integer","format":"int32"},"type":{"type":"string"},"message":{"type":"string"}}},"Category":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"name":{"type":"string"}},"xml":{"name":"Category"}},"Pet":{"type":"object","required":["name","photoUrls"],"properties":{"id":{"type":"integer","format":"int64"},"category":{"$ref":"#/definitions/Category"},"name":{"type":"string","example":"doggie"},"photoUrls":{"type":"array","xml":{"wrapped":true},"items":{"type":"string","xml":{"name":"photoUrl"}}},"tags":{"type":"array","xml":{"wrapped":true},"items":{"xml":{"name":"tag"},"$ref":"#/definitions/Tag"}},"status":{"type":"string","description":"pet status in the store","enum":["available","pending","sold"]}},"xml":{"name":"Pet"}},"Tag":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"name":{"type":"string"}},"xml":{"name":"Tag"}},"Order":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"petId":{"type":"integer","format":"int64"},"quantity":{"type":"integer","format":"int32"},"shipDate":{"type":"string","format":"date-time"},"status":{"type":"string","description":"Order Status","enum":["placed","approved","delivered"]},"complete":{"type":"boolean"}},"xml":{"name":"Order"}},"User":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"username":{"type":"string"},"firstName":{"type":"string"},"lastName":{"type":"string"},"email":{"type":"string"},"password":{"type":"string"},"phone":{"type":"string"},"userStatus":{"type":"integer","format":"int32","description":"User Status"}},"xml":{"name":"User"}}},"externalDocs":{"description":"Find out more about Swagger","url":"http://swagger.io"}}</con:content><con:type>https://swagger.io/swagger2/specification</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://petstore.swagger.io</con:endpoint><con:endpoint>https://petstore.swagger.io</con:endpoint></con:endpoints><con:resource name="/user/createWithList" path="/user/createWithList" id="52a4a6de-2acb-4f72-90bc-1beb254fced5"><con:settings/><con:parameters/><con:method name="createUsersWithListInput" id="4b9b5b0c-5a7a-45f8-a96f-65913a42096f" method="POST"><con:description>&#13;
+Creates list of users with given input array</con:description><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/><con:sampleContent>{ }</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status/><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status/><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="d3ed2b04-bd53-4d67-a106-77e4274ec87a" mediaType="application/json"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{ }</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:parameters/></con:request></con:method></con:resource><con:resource name="/user/{username}" path="/user/{username}" id="ac4618e5-7865-4c0a-9e1e-c38c0ace9dfb"><con:settings/><con:parameters><con:parameter required="true"><con:name>username</con:name><con:style>TEMPLATE</con:style><con:description>The name that needs to be deleted</con:description></con:parameter></con:parameters><con:method name="getUserByName" id="f1052644-d9c6-43ef-a099-0586d2b3c740" method="GET"><con:description>&#13;
+Get user by user name</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:sampleContent>{&#13;
+  "id" : 0,&#13;
+  "username" : "string",&#13;
+  "firstName" : "string",&#13;
+  "lastName" : "string",&#13;
+  "email" : "string",&#13;
+  "password" : "string",&#13;
+  "phone" : "string",&#13;
+  "userStatus" : 0&#13;
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200</con:status><con:params/><con:sampleContent><![CDATA[<User>
+   <id>0</id>
+   <username>string</username>
+   <firstName>string</firstName>
+   <lastName>string</lastName>
+   <email>string</email>
+   <password>string</password>
+   <phone>string</phone>
+   <userStatus>0</userStatus>
+</User>]]></con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:request name="Get" id="d08ff4d0-1192-4dbd-8fd0-7fd49c53a483" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/abcewe</con:originalUri><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method><con:method name="updateUser" id="a7401453-f6ce-4f44-be06-15b6b0102c1d" method="PUT"><con:description>This can only be done by the logged in user.&#13;
+Updated user</con:description><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/><con:sampleContent>{&#13;
+  "id" : 0,&#13;
+  "username" : "string",&#13;
+  "firstName" : "string",&#13;
+  "lastName" : "string",&#13;
+  "email" : "string",&#13;
+  "password" : "string",&#13;
+  "phone" : "string",&#13;
+  "userStatus" : 0&#13;
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Update" id="467b9896-2309-4ed0-9430-89b492088e62" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{\r
+  "id" : 0,\r
+  "username" : "string",\r
+  "firstName" : "string",\r
+  "lastName" : "string",\r
+  "email" : "string",\r
+  "password" : "string",\r
+  "phone" : "string",\r
+  "userStatus" : 0\r
+}</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method><con:method name="deleteUser" id="cf3787d1-2476-4e96-9939-2d01a862b527" method="DELETE"><con:description>This can only be done by the logged in user.&#13;
+Delete user</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:request name="Request 1" id="a870cb03-5146-4729-8e2f-f5a1a1782c30" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource><con:resource name="/user/login" path="/user/login" id="7edce95e-f55c-4e59-a8fa-c38bb3463a6d"><con:settings/><con:parameters/><con:method name="loginUser" id="5d0cb554-6de5-4acd-96d0-7a2313e44545" method="GET"><con:description>&#13;
+Logs user into the system</con:description><con:settings/><con:parameters><con:parameter required="true"><con:name>username</con:name><con:style>QUERY</con:style><con:description>The user name for login</con:description></con:parameter><con:parameter required="true"><con:name>password</con:name><con:style>QUERY</con:style><con:description>The password for login in clear text</con:description></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:sampleContent>"string"</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>200</con:status><con:params/><con:sampleContent>&lt;string>string&lt;/string></con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:request name="Request 1" id="7a6db9c0-3b70-492a-bf8c-593809f87702" mediaType="application/json"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource><con:resource name="/user/logout" path="/user/logout" id="af4f7b04-fb4f-4e00-ac22-6e76d7ef18e6"><con:settings/><con:parameters/><con:method name="logoutUser" id="39a887ae-0458-41c6-8b78-505ebd9d64be" method="GET"><con:description>&#13;
+Logs out current logged in user session</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status/><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status/><con:params/></con:representation><con:request name="Request 1" id="9e634336-1ee6-4913-8948-f66dc4bc2294" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/logout</con:originalUri><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource><con:resource name="/user/createWithArray" path="/user/createWithArray" id="768e6ed3-c3ba-4a07-8309-54d6af452c6e"><con:settings/><con:parameters/><con:method name="createUsersWithArrayInput" id="80ad42e9-0ebe-4d4c-a7bf-b9d6a5a03cff" method="POST"><con:description>&#13;
+Creates list of users with given input array</con:description><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/><con:sampleContent>{ }</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status/><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status/><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="0f4535be-3418-4991-9c26-2449601b02b2" mediaType="application/json"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{ }</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:parameters/></con:request></con:method></con:resource><con:resource name="/user" path="/user" id="832bffd4-bd63-4734-8b10-604f3cca4c12"><con:settings/><con:parameters/><con:method name="createUser" id="df2e9cbd-6d78-41c9-9f45-e71989f141d5" method="POST"><con:description>This can only be done by the logged in user.&#13;
+Create user</con:description><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/><con:sampleContent>{&#13;
+  "id" : 0,&#13;
+  "username" : "string",&#13;
+  "firstName" : "string",&#13;
+  "lastName" : "string",&#13;
+  "email" : "string",&#13;
+  "password" : "string",&#13;
+  "phone" : "string",&#13;
+  "userStatus" : 0&#13;
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status/><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/xml</con:mediaType><con:status/><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Create" id="3aae14e2-4b57-43b7-9e9e-cd1156e52878" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{\r
+  "id" : 0,\r
+  "username" : "string",\r
+  "firstName" : "string",\r
+  "lastName" : "string",\r
+  "email" : "string",\r
+  "password" : "string",\r
+  "phone" : "string",\r
+  "userStatus" : 0\r
+}</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="3f248dd8-9860-4b5a-aaf2-e8f33472f672" name="Test Suite"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:testCase id="ad2c04f3-c751-4063-92f0-77e6a2372c75" discardOkResults="false" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Test Case 2" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="properties" name="Properties" id="1583520c-3dfb-4e7d-b9cf-9ac4d3e4ea62"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>username</con:name><con:value>TestUN49</con:value></con:property><con:property><con:name>firstName</con:name><con:value>Fname49</con:value></con:property><con:property><con:name>lastName</con:name><con:value>Lname49</con:value></con:property><con:property><con:name>email</con:name><con:value>Tem49</con:value></con:property><con:property><con:name>password</con:name><con:value>Tpwd49</con:value></con:property><con:property><con:name>phone</con:name><con:value>9876510049</con:value></con:property><con:property><con:name>updated phone</con:name><con:value>9876590049</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="Create" id="f09c37ff-b870-472d-aefc-1b1516b8a36f"><con:settings/><con:config service="User" resourcePath="/v2/user" methodName="createUser" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Create" id="3aae14e2-4b57-43b7-9e9e-cd1156e52878" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{\r
+  "id" : 0,\r
+  "username" : "${Properties#username}",\r
+  "firstName" : "${Properties#firstName}",\r
+  "lastName" : "${Properties#lastName}",\r
+  "email" : "${Properties#email}",\r
+  "password" : "${Properties#password}",\r
+  "phone" : "${Properties#phone}",\r
+  "userStatus" : 0\r
+}</con:request><con:originalUri>https://petstore.swagger.io/v2/user</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="a576206d-99db-4ea6-bfaa-624dc3fe4b26" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="12c080d5-9f9c-4a2d-95f2-ca9f31e83d26" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Get 1" id="9f12a2b0-b48e-43ab-8d3d-79bf65571fde"><con:settings/><con:config service="User" resourcePath="/v2/user/{username}" methodName="getUserByName" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get 1" id="d08ff4d0-1192-4dbd-8fd0-7fd49c53a483" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/abcewe</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="24712b6e-48fd-476e-be72-899c2c41d532" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="926ce767-9a17-4308-a339-4ca067e3ea3c" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Update" id="52fb25df-61d6-47bd-a469-367ce6f6e399"><con:settings/><con:config service="User" resourcePath="/v2/user/{username}" methodName="updateUser" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Update" id="467b9896-2309-4ed0-9430-89b492088e62" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request>{\r
+  "id" : "${Create#Response#$['message']}",\r
+  "username" : "${Properties#username}",\r
+  "firstName" : "${Properties#firstName}",\r
+  "lastName" : "${Properties#lastName}",\r
+  "email" : "${Properties#email}",\r
+  "password" : "${Properties#password}",\r
+  "phone" : "${Properties#updated phone}",\r
+  "userStatus" : 0\r
+}</con:request><con:originalUri>https://petstore.swagger.io/v2/user/</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="6aaa3fe2-f8f5-4034-9955-76054cbdde40" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="43f36f67-7dbb-4018-969e-616f242d1010" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Get 2" id="a618f592-bf8e-41f4-913a-075069a5dd4f"><con:settings/><con:config service="User" resourcePath="/v2/user/{username}" methodName="getUserByName" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get 2" id="d08ff4d0-1192-4dbd-8fd0-7fd49c53a483" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/abcewe</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="24712b6e-48fd-476e-be72-899c2c41d532" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="926ce767-9a17-4308-a339-4ca067e3ea3c" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Login" id="6814d29c-abca-45d5-91de-bc51f13f922c"><con:settings/><con:config service="User" resourcePath="/v2/user/login" methodName="loginUser" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Login" id="7a6db9c0-3b70-492a-bf8c-593809f87702" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/login</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="b5935324-f627-4bfa-a0af-497ecc105060" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="457a1363-ad97-414e-932d-de2f25b8f5b0" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="password" value="${Properties#password}"/><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Logout" id="ff7b2454-b56f-4cc9-b55a-f49d2278807f"><con:settings/><con:config service="User" resourcePath="/v2/user/logout" methodName="logoutUser" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Logout" id="9e634336-1ee6-4913-8948-f66dc4bc2294" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/logout</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="b8d63c98-38c9-4e87-b3bc-14649e505f93" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="1c301482-a25c-48e7-b2d0-7c18d5d4fe8d" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Delete" id="a5dba3a2-5254-4ffb-b563-136aa7779f34"><con:settings/><con:config service="User" resourcePath="/v2/user/{username}" methodName="deleteUser" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Delete" id="a870cb03-5146-4729-8e2f-f5a1a1782c30" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/TestUN3</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="1b62de99-ccfe-4e57-8e30-93e2f4bbe3ca" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="98548520-4dca-4934-9a43-fcb1067cb801" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Get 3" id="890ccbdd-e38b-4f10-8b5e-86d18133e2e9"><con:settings/><con:config service="User" resourcePath="/v2/user/{username}" methodName="getUserByName" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Get 3" id="d08ff4d0-1192-4dbd-8fd0-7fd49c53a483" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://petstore.swagger.io</con:endpoint><con:request/><con:originalUri>https://petstore.swagger.io/v2/user/TestUN3</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="350414a3-80a6-42b7-bae9-15e8f0fae0e2" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="Response SLA Assertion" id="2daacf62-9a7c-4005-92e5-932ef01d8a4d" name="Response SLA"><con:configuration><SLA>200</SLA></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters><con:entry key="username" value="${Properties#username}"/></con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="dde8ae09-2395-4d69-99ec-d0a0a6c9eb0b"><con:settings/><con:config><script>import java.io.File
+import jxl.*
+import groovy.json.JsonSlurper
+
+//read excelfile
+Workbook wb = Workbook.getWorkbook(new File('C:/Users/Aditya/Desktop/TestData_TC2.xls'))
+sheet = wb.getSheet(0)
+
+//fetching values from worksheet
+un = sheet.getCell(0,1).getContents()
+fn = sheet.getCell(1,1).getContents()
+ln = sheet.getCell(2,1).getContents()
+em = sheet.getCell(3,1).getContents()
+pw = sheet.getCell(4,1).getContents()
+ph = sheet.getCell(5,1).getContents()
+uph = sheet.getCell(6,1).getContents()
+
+//setting property values
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("username",un)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("firstName",fn)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("lastName",ln)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("email",em)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("password",pw)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("phone",ph)
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("updated phone",uph)
+
+//Running Create Step
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Create"].run(testRunner,context)
+
+//Validate above step using Get Request
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Get 1"].run(testRunner,context)
+
+	def get1Response = context.testCase.getTestStepByName("Get 1").getPropertyValue("Response")
+	slurperResponse = new JsonSlurper().parseText(get1Response)
+
+     if(slurperResponse.username==un)
+{
+	log.info "User Created Successfully"
+	assert true
+}
+    else  if(slurperResponse.firstName==fn)
+{
+	log.info "User Created Successfully"
+	assert true
+}
+else
+{
+	log.info "User Creation Failed"
+	assert false
+}
+
+//running the Update Step
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Update"].run(testRunner,context)
+
+//Validate above step using Get Request
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Get 2"].run(testRunner,context)
+
+	def get2Response = context.testCase.getTestStepByName("Get 2").getPropertyValue("Response")
+	slurperResponse1 = new JsonSlurper().parseText(get2Response)
+
+ if(slurperResponse1.phone==uph)
+{
+	log.info "User Updated Successfully"
+	assert true
+}
+else
+{
+	log.info "User Update Failed"
+	assert false
+}
+
+//Running the login step
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Login"].run(testRunner,context)
+
+//Validating the response of above step
+
+	def lgnResponse = context.testCase.getTestStepByName("Login").getPropertyValue("Response")
+	slurperResponse = new JsonSlurper().parseText(lgnResponse)
+
+
+ if(slurperResponse.code==200)
+{
+	log.info "User Logged in Successfully"
+	assert true
+}
+
+else  if(slurperResponse.message.contains"logged in user")
+{
+	log.info "User Logged in Successfully"
+	assert true
+}
+
+else
+{
+	log.info "User Login Failed"
+	assert false
+}
+
+//User log out
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Logout"].run(testRunner,context)
+
+//Validating the response of above step
+
+	def lgoResponse = context.testCase.getTestStepByName("Logout").getPropertyValue("Response")
+	slurperResponse = new JsonSlurper().parseText(lgoResponse)
+
+
+ if(slurperResponse.code==200)
+{
+	log.info "User Logged Out Successfully"
+	assert true
+}
+
+else  if(slurperResponse.message== ok)
+{
+	log.info "User Logged Out Successfully"
+	assert true
+}
+
+else
+{
+	log.info "User Logout Failed"
+	assert false
+}
+
+//Delete User Step
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Delete"].run(testRunner,context)
+
+//Validating the response of above step
+
+	def delResponse = context.testCase.getTestStepByName("Delete").getPropertyValue("Response")
+	slurperResponse = new JsonSlurper().parseText(delResponse)
+
+
+ if(slurperResponse.code==200)
+{
+	log.info "User Deleted Successfully"
+	assert true
+}
+
+else  if(slurperResponse.message== un)
+{
+	log.info "User Deleted Successfully"
+	assert true
+}
+
+else
+{
+	log.info "User Deletion Failed"
+	assert false
+}
+
+//Retrieving deleted user
+testRunner.testCase.testSuite.project.testSuites["Test Suite"].testCases["Test Case 2"].testSteps["Get 3"].run(testRunner,context)
+
+def get3ResponseXml= context.testCase.getTestStepByName("Get 3").getPropertyValue("Response")
+slurperResponse= new JsonSlurper().parseText(get3ResponseXml)
+
+if(slurperResponse.code==1)
+{
+	log.info "User Not Found"
+	assert true
+}
+
+else  if(slurperResponse.message== "User not found")
+{
+	log.info "User Not Found"
+	assert true
+}
+
+else
+{
+	log.info "User Still Exists"
+	assert false
+}
+
+wb.close()
+
+
+</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>1583520c-3dfb-4e7d-b9cf-9ac4d3e4ea62</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>890ccbdd-e38b-4f10-8b5e-86d18133e2e9</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>9f12a2b0-b48e-43ab-8d3d-79bf65571fde</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>a618f592-bf8e-41f4-913a-075069a5dd4f</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:jmsConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:eventHandlers type="RequestFilter.filterRequest" name="RequestFilter.filterRequest"><con:script>// Sample event script to add custom HTTP header to all outgoing REST, SOAP and HTTP(S) calls
+// This code is often used for adding custom authentication to ReadyAPI functional tests
+
+// If hardcoding the token, uncomment and change line 5
+// token = '4567'
+
+// If your token is parameterized in Project level custom property, uncomment line 8
+// token = request.parent.testCase.testSuite.project.getProperty('auth_token').getValue()
+
+// To modify all outgoing calls, remove comments from lines 11 to 16
+// headers = request.requestHeaders
+// if (headers.containsKey('auth_token2') == false) {
+//   headers.put('auth_token2', token)
+//   request.requestHeaders = headers
+// }</con:script></con:eventHandlers><con:eventHandlers type="TestRunListener.afterStep" name="TestRunListener.afterStep"><con:script>// Save all test step results into files
+// Change the directory path in line 5 to a location where you want to store details
+// then uncomment lines 5 to 10
+
+// filePath = 'C:\\tempOutputDirectory\\'
+// fos = new java.io.FileOutputStream(filePath + testStepResult.testStep.label + '.txt', true)
+// pw = new java.io.PrintWriter(fos)
+// testStepResult.writeTo(pw)
+// pw.close()
+// fos.close()</con:script></con:eventHandlers><con:authRepository/><con:tags/></con:soapui-project>
